@@ -76,7 +76,7 @@ dependencies = [
  "axfs_vfs",
  "axhal",
  "axstd",
- "bcm2835_gpio",
+ "bcm2711_gpio",
  "crate_interface",
 ]
 
@@ -392,7 +392,7 @@ dependencies = [
  "axalloc",
  "axconfig",
  "axlog",
- "bcm2835_gpio",
+ "bcm2711_gpio",
  "bitflags 2.4.0",
  "cfg-if",
  "crate_interface",
@@ -538,6 +538,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
 
 [[package]]
+name = "bcm2711_gpio"
+version = "0.1.0"
+dependencies = [
+ "tock-registers",
+]
+
+[[package]]
 name = "bcm2835-sdhci"
 version = "0.1.0"
 source = "git+https://github.com/lhw2002426/bcm2835-sdhci.git?rev=e974f16#e974f168efa72b470a01f61bdef32240c66f54fc"
@@ -546,13 +553,6 @@ dependencies = [
  "log",
  "tock-registers",
  "volatile 0.2.7",
-]
-
-[[package]]
-name = "bcm2835_gpio"
-version = "0.1.0"
-dependencies = [
- "tock-registers",
 ]
 
 [[package]]

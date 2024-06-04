@@ -1,5 +1,5 @@
 pub mod mem;
-mod bcm2835_gpio;
+mod bcm2711_gpio;
 
 #[cfg(feature = "smp")]
 pub mod mp;
@@ -64,7 +64,7 @@ pub fn platform_init() {
 /// Initializes the platform devices for secondary CPUs.
 #[cfg(feature = "smp")]
 pub fn platform_init_secondary() {
-    bcm2835_gpio::init_led();
+    bcm2711_gpio::init_led();
     #[cfg(feature = "irq")]
     super::aarch64_common::gic::init_secondary();
     super::aarch64_common::generic_timer::init_percpu();

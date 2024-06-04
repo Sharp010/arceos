@@ -1,5 +1,5 @@
 use std::io::{self};
-use bcm2835_gpio::{RpiGpio,GpioFunction};
+use bcm2711_gpio::{RpiGpio,GpioFunction};
 use std::thread;
 use std::time::Duration;
 use axhal::mem::phys_to_virt;

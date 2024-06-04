@@ -17,4 +17,4 @@ crate_interface = { path = "../../crates/crate_interface", optional = true }
 # axstd = { path = "../../../ulib/axstd", features = ["alloc", "fs"], optional = true }
 axhal = { path = "../../modules/axhal"}
 axstd = { path = "../../ulib/axstd", optional = true}
-bcm2835_gpio = { path = "../../crates/bcm2835_gpio" }
+bcm2711_gpio = { path = "../../crates/bcm2711_gpio" }

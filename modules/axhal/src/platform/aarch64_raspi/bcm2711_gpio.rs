@@ -1,5 +1,5 @@
 use crate::mem::phys_to_virt;
-use bcm2835_gpio::RpiGpio;
+use bcm2711_gpio::RpiGpio;
 use memory_addr::PhysAddr;
 use spinlock::SpinNoIrq;
 use axconfig::GPIO_PADDR; 
