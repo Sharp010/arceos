@@ -1,0 +1,12 @@
+[package]
+name = "bcm2835_gpio"
+version = "0.1.0"
+edition = "2021"
+
+# [features]
+# linux=["osl/linux"]
+# arceos=["osl/arceos"]
+# default=["arceos"]
+
+[dependencies]
+tock-registers = "0.8.0"

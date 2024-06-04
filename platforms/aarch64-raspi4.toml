@@ -18,10 +18,15 @@ kernel-base-vaddr = "0xffff_0000_0008_0000"
 phys-virt-offset = "0xffff_0000_0000_0000"
 # MMIO regions with format (`base_paddr`, `size`).
 mmio-regions = [
+    ["0xFE20_0000","0xB4"],       # gpio
     ["0xFE20_1000", "0x1000"],      # PL011 UART
     ["0xFF84_1000", "0x8000"],      # GICv2
 ]
 virtio-mmio-regions = []
+
+# GPIO Address
+gpio-paddr = "0xFE20_0000"
+
 # UART Address
 uart-paddr = "0xFE20_1000"
 uart-irq = "0x79"

@@ -1,4 +1,8 @@
 use std::io::{self};
+use bcm2835_gpio::{RpiGpio,GpioFunction};
+use std::thread;
+use std::time::Duration;
+use axhal::mem::phys_to_virt;
 
 #[cfg(all(not(feature = "axstd"), unix))]
 
@@ -18,8 +22,42 @@ const CMD_TABLE: &[(&str, CmdHandler)] = &[
     ("help", do_help),
     ("uname", do_uname),
     ("ldr", do_ldr),
-    ("str", do_str)
+    ("str", do_str),
+    ("marquee",do_marquee)
 ];
+
+fn do_marquee(_args: &str) {
+
+    let gpio_base = 0xFE200000 as *mut u8;
+    let mut led_gpio = RpiGpio::new(phys_to_virt((gpio_base as usize).into()).as_mut_ptr());
+
+    for i in 2..=4 {
+        led_gpio.set_function(i, GpioFunction::Output); 
+    }
+
+    println!("led marquee start...");
+    loop {
+        // 依次打开LED灯
+        for i in 2..=4 {
+            print!("open led {}\n", i);
+            led_gpio.set_value(i, 1); 
+            println!("direction is {}", led_gpio.get_function(i)); // 读取gpio的功能
+            println!("value is {}", led_gpio.read_value(i));  // 读取gpio的值
+            println!();
+            thread::sleep(Duration::from_secs(1));
+        }
+
+        // 依次关闭LED灯
+        for i in 2..=4 {
+            print!("close led {}\n", i);
+            led_gpio.set_value(i, 0); 
+            println!("direction is {}", led_gpio.get_function(i)); // 读取gpio的功能
+            println!("value is {}", led_gpio.read_value(i));  // 读取gpio的值
+            println!();
+            thread::sleep(Duration::from_secs(1));
+        }
+    }
+}
 
 fn do_uname(_args: &str) {
     let arch = option_env!("AX_ARCH").unwrap_or("");
@@ -29,6 +67,7 @@ fn do_uname(_args: &str) {
         _ => " SMP",
     };
     let version = option_env!("CARGO_PKG_VERSION").unwrap_or("0.1.0");
+    println!("sb!");
     println!(
         "ArceOS {ver}{smp} {arch} {plat}",
         ver = version,
